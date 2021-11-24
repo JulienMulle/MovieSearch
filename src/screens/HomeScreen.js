@@ -1,7 +1,9 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import {Text, ScrollView, StyleSheet, View} from 'react-native';
+import {Text, ScrollView, StyleSheet, View, FlatList} from 'react-native';
 import Colors from '../constant/Colors';
+
+const Genres = ["All", "Action", "Comedy", "Romance", "Horror", "Sci-Fi"];
 
 const HomeScreen = () => {
   return (
@@ -10,6 +12,14 @@ const HomeScreen = () => {
         <Text style={styles.headerTitle}> Now Playing</Text>
         <Text style={styles.headerSubTitle}> View All</Text>
       </View>
+      <FlatList 
+      data={Genres}
+      horizontal
+      keyExtractor={(item)=>item}
+      renderItem={({item, index})=>{
+        return <View></View>;
+      }}
+      />
     </ScrollView>
   );
 };
