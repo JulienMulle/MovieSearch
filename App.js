@@ -1,12 +1,23 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
-import {Text, View} from 'react-native';
-import {Navigation} from '@react-navigation/native';
+//import {Text, View} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+//components
+import HomeScreen from './src/screens/HomeScreen';
+import MovieScreen from './src/screens/MovieScreen';
+
+
+const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-    <View>
-      <Text>Hello l'ami du bon gout</Text>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Movie" component={MovieScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
