@@ -1,12 +1,12 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, ScrollView} from 'react-native';
 
 const HomeScreen = () => {
   return (
-    <View>
+    <ScrollView>
       <Text>HomeScreen</Text>
-    </View>
+    </ScrollView>
   );
 };
 
