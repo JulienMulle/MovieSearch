@@ -19,7 +19,11 @@ const App = () => {
         component={HomeScreen}
         options={{headerShown:false}}
         />
-        <Stack.Screen name="Movie" component={MovieScreen} />
+        <Stack.Screen 
+        name="Movie" 
+        component={MovieScreen}
+        options={{headerShown:false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
