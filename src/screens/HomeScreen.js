@@ -2,6 +2,7 @@
 import React from 'react';
 import {Text, ScrollView, StyleSheet, View, FlatList} from 'react-native';
 import GenreCard from '../components/GenreCard';
+import ItemSeparator from '../components/ItemSeparator';
 import Colors from '../constant/Colors';
 
 const Genres = ["All", "Action", "Comedy", "Romance", "Horror", "Sci-Fi"];
@@ -17,6 +18,8 @@ const HomeScreen = () => {
       data={Genres}
       horizontal
       keyExtractor={(item)=>item}
+      showsHorizontalScrollIndicator={false}
+      ItemSeparatorComponent={()=> <ItemSeparator width={10}/>}
       renderItem={({item})=><GenreCard />}
       />
     </ScrollView>
