@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import Colors from '../constant/Colors';
+import IMAGES from '../constant/Images';
 //ne pas oublié de faire npx react-native link 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -10,7 +11,10 @@ const MovieCard = () => {
     return (
         <TouchableOpacity>
             <View style={styles.container}>
-            <Text> MovieCard</Text>
+            <View style={styles.imdbContainer}>
+                <Image source={IMAGES.IMDB} resizeMode="cover" style={styles.imdbImage}/>
+                <Text style={styles.imdbRating}>9.5</Text>
+            </View>
             </View>
             <View>
                 <Text style={styles.movieTitle} numberOfLines={3}>l'ami du bon gout l'ami du bon gout</Text>
@@ -55,6 +59,25 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
     },
-})
+    imdbContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        alignSelf: "flex-end",
+        backgroundColor: Colors.YELLOW,
+        borderBottomLeftRadius:5,
+        borderTopRightRadius: 12,
+        paddingVertical:3,
+    },
+    imdbImage:{
+        height: 20,
+        width: 50,
+        borderBottomLeftRadius: 5,
+    },
+    imdbRating:{
+        marginRight: 5,
+        color: Colors.HEART,
+        fontFamily: "NunitoSans-ExtraBold",
+    }
+});
 
 export default MovieCard;
