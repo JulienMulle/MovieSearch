@@ -5,10 +5,17 @@ import Colors from '../constant/Colors';
 const {width} = Dimensions.get("screen");
 const setWidth = (w) => (width / 100) * w;
 
-const GenreCard = ({ genreName }) => {
+const GenreCard = ({ genreName, active, onPress }) => {
     return (
-        <TouchableOpacity activeOpacity={0.5} style={styles.container} >
-            <Text style={styles.genreText}>{genreName}</Text>
+        <TouchableOpacity 
+        activeOpacity={0.5} 
+        onPress={()=> onPress(genreName)}
+        style={{...styles.container, 
+            backgroundColor: active ? Colors.ACTIVE : Colors.WHITE}} >
+            <Text style={{...styles.genreText, 
+                color: active ? Colors.WHITE : Colors.BLACK}}>
+                {genreName}
+            </Text>
         </TouchableOpacity>
     )
 }

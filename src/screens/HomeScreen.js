@@ -23,7 +23,13 @@ const HomeScreen = () => {
       keyExtractor={(item)=>item}
       showsHorizontalScrollIndicator={false}
       ItemSeparatorComponent={()=> <ItemSeparator width={10}/>}
-      renderItem={({item})=><GenreCard genreName={item}/>}
+      renderItem={({item})=>(
+      <GenreCard 
+      genreName={item} 
+      active={item === activeGenre ? true : false}
+      onPress={(genreName)=>setActiveGenre(genreName)}
+      />
+      )}
       />
       </View>
     </ScrollView>
