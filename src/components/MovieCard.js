@@ -6,9 +6,10 @@ import IMAGES from '../constant/Images';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const myIcon= <Icon name="heart" size={15} color="#f51637" style={{marginRight: 5}} />;
-const HeartClickable = <Icon name="heart-o" size={25} color= {Colors.WHITE} />;
+const HeartClickable = <Icon name="heart-o" size={25} color= {Colors.WHITE} style={{position: "absolute", bottom:10, left:10}}/>;
 
 const MovieCard = () => {
+    
     return (
         <TouchableOpacity>
             <View style={styles.container}>
