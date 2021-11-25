@@ -1,15 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Image, TouchableNativeFeedback } from 'react-native';
 import Colors from '../constant/Colors';
 import IMAGES from '../constant/Images';
 //ne pas oublié de faire npx react-native link 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const myIcon= <Icon name="heart" size={15} color="#f51637" style={{marginRight: 5}} />;
-const HeartClickable = <Icon name="heart-o" size={25} color= {Colors.WHITE} style={{position: "absolute", bottom:10, left:10}}/>;
+
 
 const MovieCard = () => {
     
+    const [liked, setLiked] = useState(false)
+
+    const myIcon= <Icon name="heart" size={15} color="#f51637" style={{marginRight: 5}} />;
+    const HeartClickable = <Icon name= {liked ? "heart" : "heart-o"} size={25} color={ liked ? Colors.HEART : Colors.WHITE} style={{position: "absolute", bottom:10, left:10}}/>;
+
     return (
         <TouchableOpacity>
             <View style={styles.container}>
@@ -17,7 +21,7 @@ const MovieCard = () => {
                 <Image source={IMAGES.IMDB} resizeMode="cover" style={styles.imdbImage}/>
                 <Text style={styles.imdbRating}>9.5</Text>
             </View>
-            <TouchableNativeFeedback>
+            <TouchableNativeFeedback onPress={()=> setLiked(!liked)}>
             {HeartClickable}
             </TouchableNativeFeedback>
             </View>
