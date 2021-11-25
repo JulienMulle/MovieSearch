@@ -12,7 +12,12 @@ const MovieCard = () => {
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: Colors.ACTIVE
+        backgroundColor: Colors.ACTIVE,
+        height: 340,
+        width: 230,
+        borderRadius: 12,
+        elevation: 5,
+        marginVertical: 2,
     }
 })
 
