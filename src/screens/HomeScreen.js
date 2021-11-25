@@ -50,10 +50,12 @@ const styles = StyleSheet.create({
   },
   headerTitle:{
     fontSize: 28,
+    fontFamily: 'NunitoSans-Regular',
   },
   headerSubTitle:{
     fontSize: 13,
     color: Colors.ACTIVE,
+    fontFamily: 'NunitoSans-Bold',
   },
   genreListContainer:{
     paddingVertical: 10,
