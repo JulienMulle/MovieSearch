@@ -27,7 +27,7 @@ const HomeScreen = () => {
       <GenreCard 
       genreName={item} 
       active={item === activeGenre ? true : false}
-      onPress={(genreName)=>setActiveGenre(genreName)}
+      onPress={setActiveGenre}
       />
       )}
       />
