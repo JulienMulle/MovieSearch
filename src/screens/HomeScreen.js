@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, {useState} from 'react';
 import {Text, ScrollView, StyleSheet, View, FlatList} from 'react-native';
 import GenreCard from '../components/GenreCard';
 import ItemSeparator from '../components/ItemSeparator';
@@ -8,6 +8,8 @@ import Colors from '../constant/Colors';
 const Genres = ["All", "Action", "Comedy", "Romance", "Horror", "Sci-Fi"];
 
 const HomeScreen = () => {
+  const [activeGenre, setActiveGenre] = useState("all")
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.headerContainer}>
