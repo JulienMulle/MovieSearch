@@ -7,7 +7,7 @@ const setWidth = (w) => (width / 100) * w;
 
 const GenreCard = ({ genreName }) => {
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity activeOpacity={0.5} style={styles.container} >
             <Text style={styles.genreText}>{genreName}</Text>
         </TouchableOpacity>
     )
