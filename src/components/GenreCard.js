@@ -5,10 +5,10 @@ import Colors from '../constant/Colors';
 const {width} = Dimensions.get("screen");
 const setWidth = (w) => (width / 100) * w;
 
-const GenreCard = () => {
+const GenreCard = ({ genreName }) => {
     return (
         <View style={styles.container}>
-            <Text>GenreCard</Text>
+            <Text style={styles.genreText}>{genreName}</Text>
         </View>
     )
 }
@@ -24,6 +24,10 @@ const styles = StyleSheet.create({
         marginVertical: 2,
         width: setWidth(25),
     },
+    genreText: {
+        fontSize: 13,
+        color: Colors.ACTIVE
+    }
 })
 
 export default GenreCard

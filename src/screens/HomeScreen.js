@@ -14,14 +14,16 @@ const HomeScreen = () => {
         <Text style={styles.headerTitle}> Now Playing</Text>
         <Text style={styles.headerSubTitle}> View All</Text>
       </View>
+      <View style={styles.genreListContainer}>
       <FlatList 
       data={Genres}
       horizontal
       keyExtractor={(item)=>item}
       showsHorizontalScrollIndicator={false}
       ItemSeparatorComponent={()=> <ItemSeparator width={10}/>}
-      renderItem={({item})=><GenreCard />}
+      renderItem={({item})=><GenreCard genreName={item}/>}
       />
+      </View>
     </ScrollView>
   );
 };
@@ -45,6 +47,9 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: Colors.ACTIVE,
   },
+  genreListContainer:{
+    paddingVertical: 10,
+  }
 });
 
 export default HomeScreen;
