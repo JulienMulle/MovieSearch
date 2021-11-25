@@ -8,6 +8,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import MovieScreen from './src/screens/MovieScreen';
 
 
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
