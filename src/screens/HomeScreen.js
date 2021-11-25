@@ -1,15 +1,23 @@
 /* eslint-disable prettier/prettier */
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Text, ScrollView, StyleSheet, View, FlatList} from 'react-native';
 import GenreCard from '../components/GenreCard';
 import ItemSeparator from '../components/ItemSeparator';
 import MovieCard from '../components/MovieCard';
 import Colors from '../constant/Colors';
+import { getNowPlayingMovies } from '../services/RequetesAxios';
+
 
 const Genres = ["All", "Action", "Comedy", "Romance", "Horror", "Sci-Fi"];
 
 const HomeScreen = () => {
-  const [activeGenre, setActiveGenre] = useState("all")
+  const [activeGenre, setActiveGenre] = useState("all");
+  const [nowPlayingMovies, setNowPlayingMovies] = useState({})
+
+  useEffect(() => {
+    getNowPlayingMovies()
+    .then(movieResponse => setNowPlayingMovies(movieResponse.data))
+  }, [input])
 
   return (
     <ScrollView style={styles.container}>
@@ -19,7 +27,7 @@ const HomeScreen = () => {
       </View>
       <View style={styles.genreListContainer}>
       <FlatList 
-      data={Genres}
+      data={nowPlayingMovies.results}
       horizontal
       keyExtractor={(item)=>item}
       showsHorizontalScrollIndicator={false}
@@ -35,7 +43,7 @@ const HomeScreen = () => {
       </View>
       <View>
         <FlatList
-        data={Genres}
+        data={nowPlayingMovies.results}
         horizontal
         showsHorizontalScrollIndicator={false}
         ItemSeparatorComponent={()=> <ItemSeparator width={10}/>}
