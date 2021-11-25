@@ -1,11 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Image, TouchableNativeFeedback } from 'react-native';
 import Colors from '../constant/Colors';
 import IMAGES from '../constant/Images';
 //ne pas oublié de faire npx react-native link 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const myIcon= <Icon name="heart" size={15} color="#f51637" style={{marginRight: 5}} />;
+const HeartClickable = <Icon name="heart-o" size={25} />;
 
 const MovieCard = () => {
     return (
@@ -15,6 +16,9 @@ const MovieCard = () => {
                 <Image source={IMAGES.IMDB} resizeMode="cover" style={styles.imdbImage}/>
                 <Text style={styles.imdbRating}>9.5</Text>
             </View>
+            <TouchableNativeFeedback>
+            {HeartClickable}
+            </TouchableNativeFeedback>
             </View>
             <View>
                 <Text style={styles.movieTitle} numberOfLines={3}>l'ami du bon gout l'ami du bon gout</Text>
