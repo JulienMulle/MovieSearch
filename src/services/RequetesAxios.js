@@ -13,3 +13,8 @@ const TMDB_HTTP_REQUEST = axios.create({
        api_key : TMDB_API_KEY
     }
 });
+
+const getNowPlayingMovies = () =>
+TMDB_HTTP_REQUEST.get(ENDPOINTS.NOW_PLAYING_MOVIES);
+
+export {getNowPlayingMovies,}
