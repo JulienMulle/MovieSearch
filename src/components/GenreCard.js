@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native';
 import Colors from '../constant/Colors';
 
 const {width} = Dimensions.get("screen");
@@ -7,9 +7,9 @@ const setWidth = (w) => (width / 100) * w;
 
 const GenreCard = ({ genreName }) => {
     return (
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container}>
             <Text style={styles.genreText}>{genreName}</Text>
-        </View>
+        </TouchableOpacity>
     )
 }
 
