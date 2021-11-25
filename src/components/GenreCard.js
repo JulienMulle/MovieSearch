@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
     },
     genreText: {
         fontSize: 13,
-        color: Colors.ACTIVE
+        color: Colors.ACTIVE,
+        fontFamily: 'NunitoSans-Bold',
     }
 })
 
