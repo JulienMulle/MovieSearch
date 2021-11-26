@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, Image, TouchableNativeFeedback } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Image, TouchableNativeFeedback, ImageBackground } from 'react-native';
 import Colors from '../constant/Colors';
 import IMAGES from '../constant/Images';
 //ne pas oublié de faire npx react-native link 
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { getPoster } from '../services/RequetesAxios';
 
 
 
-const MovieCard = () => {
+const MovieCard = ({title, poster, language, voteAverage, voteCount}) => {
     
     const [liked, setLiked] = useState(false)
 
@@ -16,22 +17,22 @@ const MovieCard = () => {
 
     return (
         <TouchableOpacity>
-            <View style={styles.container}>
+            <ImageBackground style={styles.container} imageStyle={{borderRadius: 12}} source={{uri:getPoster(poster)}}>
             <View style={styles.imdbContainer}>
                 <Image source={IMAGES.IMDB} resizeMode="cover" style={styles.imdbImage}/>
-                <Text style={styles.imdbRating}>9.5</Text>
+                <Text style={styles.imdbRating}>{voteAverage}</Text>
             </View>
             <TouchableNativeFeedback onPress={()=> setLiked(!liked)}>
             {HeartClickable}
             </TouchableNativeFeedback>
-            </View>
+            </ImageBackground>
             <View>
-                <Text style={styles.movieTitle} numberOfLines={3}>l'ami du bon gout l'ami du bon gout</Text>
+                <Text style={styles.movieTitle} numberOfLines={3}>{title}</Text>
                 <View style={styles.movieSubTitleContainer}>
-                    <Text style={styles.movieSubTitle}>origine defake</Text>                
+                    <Text style={styles.movieSubTitle}>{language}</Text>                
                 <View style={styles.rowAndCenter}>
                     {myIcon}
-                    <Text> 90%</Text>   
+                    <Text style={styles.movieSubTitle}> {voteCount}</Text>   
                 </View>
                 </View>
             </View>

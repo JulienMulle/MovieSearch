@@ -1,12 +1,13 @@
 /* eslint-disable prettier/prettier */
 import React, {useState, useEffect} from 'react';
 import {Text, ScrollView, StyleSheet, View, FlatList} from 'react-native';
+
+//components
 import GenreCard from '../components/GenreCard';
 import ItemSeparator from '../components/ItemSeparator';
 import MovieCard from '../components/MovieCard';
 import Colors from '../constant/Colors';
 import { getNowPlayingMovies } from '../services/RequetesAxios';
-
 
 const Genres = ["All", "Action", "Comedy", "Romance", "Horror", "Sci-Fi"];
 
@@ -17,7 +18,7 @@ const HomeScreen = () => {
   useEffect(() => {
     getNowPlayingMovies()
     .then(movieResponse => setNowPlayingMovies(movieResponse.data))
-  }, [input])
+  }, [])
 
   return (
     <ScrollView style={styles.container}>
@@ -27,7 +28,7 @@ const HomeScreen = () => {
       </View>
       <View style={styles.genreListContainer}>
       <FlatList 
-      data={nowPlayingMovies.results}
+      data={Genres}
       horizontal
       keyExtractor={(item)=>item}
       showsHorizontalScrollIndicator={false}
@@ -44,10 +45,17 @@ const HomeScreen = () => {
       <View>
         <FlatList
         data={nowPlayingMovies.results}
+        keyExtractor={(item)=>item.id.toString()}
         horizontal
         showsHorizontalScrollIndicator={false}
         ItemSeparatorComponent={()=> <ItemSeparator width={10}/>}
-        renderItem={({item})=> <MovieCard />}
+        renderItem={({item})=> <MovieCard 
+        title={item.title} 
+        language={item.original_language} 
+        voteAverage={item.vote_average}
+        voteCount={item.vote_count}
+        poster={item.poster_path}
+        />}
         />
       </View>
     </ScrollView>
