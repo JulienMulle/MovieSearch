@@ -22,4 +22,4 @@ const getPoster = (path) => `${TMDB_IMAGE_BASE_URL}/original${path}`;
 
 const getLanguage =(language_iso) => Language.find((language)=> language.iso_639_1 === language_iso)
 
-export {getNowPlayingMovies,getPoster}
+export {getNowPlayingMovies,getPoster, getLanguage}
