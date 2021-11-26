@@ -61,13 +61,15 @@ const HomeScreen = () => {
         horizontal
         showsHorizontalScrollIndicator={false}
         ItemSeparatorComponent={()=> <ItemSeparator width={10}/>}
-        renderItem={({item})=> <MovieCard 
+        renderItem={({item})=> (
+        <MovieCard 
         title={item.title} 
         language={item.original_language} 
         voteAverage={item.vote_average}
         voteCount={item.vote_count}
         poster={item.poster_path}
-        />}
+        heartLess={false}
+        />)}
         />
       </View>
       <View style={styles.headerContainer}>
@@ -81,14 +83,15 @@ const HomeScreen = () => {
         horizontal
         showsHorizontalScrollIndicator={false}
         ItemSeparatorComponent={()=> <ItemSeparator width={10}/>}
-        renderItem={({item})=> <MovieCard 
+        renderItem={({item})=> (
+        <MovieCard 
         title={item.title} 
         language={item.original_language} 
         voteAverage={item.vote_average}
         voteCount={item.vote_count}
         poster={item.poster_path}
         size={0.4}
-        />}
+        />)}
         />
       </View>
     </ScrollView>

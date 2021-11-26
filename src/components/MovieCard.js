@@ -8,7 +8,7 @@ import { getLanguage, getPoster } from '../services/RequetesAxios';
 
 
 
-const MovieCard = ({title, poster, language, voteAverage, voteCount, size}) => {
+const MovieCard = ({title, poster, language, voteAverage, voteCount, size, heartLess}) => {
     
     const [liked, setLiked] = useState(false)
 
@@ -33,9 +33,11 @@ const MovieCard = ({title, poster, language, voteAverage, voteCount, size}) => {
                     {voteAverage}
                 </Text>
             </View>
+            {!heartLess ?(
             <TouchableNativeFeedback onPress={()=> setLiked(!liked)}>
             {HeartClickable}
-            </TouchableNativeFeedback>
+            </TouchableNativeFeedback>)
+            : null}
             </ImageBackground>
             <View>
                 <Text 
@@ -110,6 +112,7 @@ const styles = StyleSheet.create({
 
 MovieCard.defaultProps = {
     size: 1,
+    heartLess: true,
 };
 
 export default MovieCard;
