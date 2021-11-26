@@ -7,18 +7,23 @@ import GenreCard from '../components/GenreCard';
 import ItemSeparator from '../components/ItemSeparator';
 import MovieCard from '../components/MovieCard';
 import Colors from '../constant/Colors';
-import { getNowPlayingMovies } from '../services/RequetesAxios';
+import { getNowPlayingMovies, getUpComingMovies } from '../services/RequetesAxios';
 
 const Genres = ["All", "Action", "Comedy", "Romance", "Horror", "Sci-Fi"];
 
 const HomeScreen = () => {
   const [activeGenre, setActiveGenre] = useState("all");
   const [nowPlayingMovies, setNowPlayingMovies] = useState({})
+  const [upComingMovies, setUpComingMovies] = useState({})
 
   useEffect(() => {
     getNowPlayingMovies()
     .then(movieResponse => setNowPlayingMovies(movieResponse.data))
   }, [])
+
+  useEffect(()=>{
+    getUpComingMovies().then(movieResponse=> setUpComingMovies(movieResponse.data))
+  })
 
   return (
     <ScrollView style={styles.container}>
@@ -64,7 +69,7 @@ const HomeScreen = () => {
       </View>
       <View>
         <FlatList
-        data={nowPlayingMovies.results}
+        data={upComingMovies.results}
         keyExtractor={(item)=>item.id.toString()}
         horizontal
         showsHorizontalScrollIndicator={false}
