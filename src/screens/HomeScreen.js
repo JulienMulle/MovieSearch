@@ -58,6 +58,27 @@ const HomeScreen = () => {
         />}
         />
       </View>
+      <View style={styles.headerContainer}>
+        <Text style={styles.headerTitle}> Coming Soon</Text>
+        <Text style={styles.headerSubTitle}> View All</Text>
+      </View>
+      <View>
+        <FlatList
+        data={nowPlayingMovies.results}
+        keyExtractor={(item)=>item.id.toString()}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        ItemSeparatorComponent={()=> <ItemSeparator width={10}/>}
+        renderItem={({item})=> <MovieCard 
+        title={item.title} 
+        language={item.original_language} 
+        voteAverage={item.vote_average}
+        voteCount={item.vote_count}
+        poster={item.poster_path}
+        size={0.4}
+        />}
+        />
+      </View>
     </ScrollView>
   );
 };

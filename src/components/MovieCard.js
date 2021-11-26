@@ -25,9 +25,13 @@ const MovieCard = ({title, poster, language, voteAverage, voteCount, size}) => {
             style={{...styles.imdbContainer, paddingVertical: 3 * size}}>
                 <Image 
                 source={IMAGES.IMDB} 
-                resizeMode="cover" style={{...styles.imdbImage, height: 20 * size, width: 50 * size}}/>
+                resizeMode="cover" 
+                style={{...styles.imdbImage, height: 20 * size, width: 50 * size}}
+                />
                 <Text 
-                style={{...styles.imdbRating, marginRight: 5 * size, fontSize: 15 * size}}>{voteAverage}</Text>
+                style={{...styles.imdbRating, marginRight: 5 * size, fontSize: 14 * size}}>
+                    {voteAverage}
+                </Text>
             </View>
             <TouchableNativeFeedback onPress={()=> setLiked(!liked)}>
             {HeartClickable}
