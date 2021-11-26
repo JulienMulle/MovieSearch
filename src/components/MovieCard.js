@@ -10,7 +10,8 @@ import { getLanguage, getPoster } from '../services/RequetesAxios';
 
 const MovieCard = ({title, poster, language, voteAverage, voteCount, size, heartLess}) => {
     
-    const [liked, setLiked] = useState(false)
+    const [liked, setLiked] = useState(false);
+    const [voteCountValue, setVoteCountValue] = useState(voteCount);
 
     const myIcon= <Icon name="heart" size={15 * size} color="#f51637" style={{marginRight: 5}} />;
     const HeartClickable = <Icon name= {liked ? "heart" : "heart-o"} size={25 * size} color={ liked ? Colors.HEART : Colors.WHITE} style={{position: "absolute", bottom:10, left:10}}/>;
@@ -34,7 +35,9 @@ const MovieCard = ({title, poster, language, voteAverage, voteCount, size, heart
                 </Text>
             </View>
             {!heartLess ?(
-            <TouchableNativeFeedback onPress={()=> setLiked(!liked)}>
+            <TouchableNativeFeedback onPress={()=>{
+            setLiked(!liked);
+            setVoteCountValue(liked ? voteCountValue -1 : voteCountValue +1)}}>
             {HeartClickable}
             </TouchableNativeFeedback>)
             : null}
@@ -52,7 +55,7 @@ const MovieCard = ({title, poster, language, voteAverage, voteCount, size, heart
                     </Text>                
                 <View style={styles.rowAndCenter}>
                     {myIcon}
-                    <Text style={styles.movieSubTitle}> {voteCount}</Text>   
+                    <Text style={styles.movieSubTitle}> {voteCountValue}</Text>   
                 </View>
                 </View>
             </View>
