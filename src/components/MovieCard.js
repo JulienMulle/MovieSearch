@@ -4,32 +4,46 @@ import Colors from '../constant/Colors';
 import IMAGES from '../constant/Images';
 //ne pas oublié de faire npx react-native link 
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { getPoster } from '../services/RequetesAxios';
+import { getLanguage, getPoster } from '../services/RequetesAxios';
 
 
 
-const MovieCard = ({title, poster, language, voteAverage, voteCount}) => {
+const MovieCard = ({title, poster, language, voteAverage, voteCount, size}) => {
     
     const [liked, setLiked] = useState(false)
 
-    const myIcon= <Icon name="heart" size={15} color="#f51637" style={{marginRight: 5}} />;
-    const HeartClickable = <Icon name= {liked ? "heart" : "heart-o"} size={25} color={ liked ? Colors.HEART : Colors.WHITE} style={{position: "absolute", bottom:10, left:10}}/>;
+    const myIcon= <Icon name="heart" size={15 * size} color="#f51637" style={{marginRight: 5}} />;
+    const HeartClickable = <Icon name= {liked ? "heart" : "heart-o"} size={25 * size} color={ liked ? Colors.HEART : Colors.WHITE} style={{position: "absolute", bottom:10, left:10}}/>;
 
     return (
         <TouchableOpacity>
-            <ImageBackground style={styles.container} imageStyle={{borderRadius: 12}} source={{uri:getPoster(poster)}}>
-            <View style={styles.imdbContainer}>
-                <Image source={IMAGES.IMDB} resizeMode="cover" style={styles.imdbImage}/>
-                <Text style={styles.imdbRating}>{voteAverage}</Text>
+            <ImageBackground 
+            style={{...styles.container, width:230 * size, height:340 * size}} 
+            imageStyle={{borderRadius: 12}} 
+            source={{uri:getPoster(poster)}}>
+            <View 
+            style={{...styles.imdbContainer, paddingVertical: 3 * size}}>
+                <Image 
+                source={IMAGES.IMDB} 
+                resizeMode="cover" style={{...styles.imdbImage, height: 20 * size, width: 50 * size}}/>
+                <Text 
+                style={{...styles.imdbRating, marginRight: 5 * size, fontSize: 15 * size}}>{voteAverage}</Text>
             </View>
             <TouchableNativeFeedback onPress={()=> setLiked(!liked)}>
             {HeartClickable}
             </TouchableNativeFeedback>
             </ImageBackground>
             <View>
-                <Text style={styles.movieTitle} numberOfLines={3}>{title}</Text>
+                <Text 
+                style={{...styles.movieTitle, width: 230 * size}} 
+                numberOfLines={3}>
+                    {title}
+                </Text>
                 <View style={styles.movieSubTitleContainer}>
-                    <Text style={styles.movieSubTitle}>{language}</Text>                
+                    <Text 
+                    style={styles.movieSubTitle}>
+                        {getLanguage(language).english_name}
+                    </Text>                
                 <View style={styles.rowAndCenter}>
                     {myIcon}
                     <Text style={styles.movieSubTitle}> {voteCount}</Text>   
@@ -89,5 +103,9 @@ const styles = StyleSheet.create({
         fontFamily: "NunitoSans-ExtraBold",
     }
 });
+
+MovieCard.defaultProps = {
+    size: 1,
+};
 
 export default MovieCard;
