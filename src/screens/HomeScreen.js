@@ -7,23 +7,30 @@ import GenreCard from '../components/GenreCard';
 import ItemSeparator from '../components/ItemSeparator';
 import MovieCard from '../components/MovieCard';
 import Colors from '../constant/Colors';
-import { getNowPlayingMovies, getUpComingMovies } from '../services/RequetesAxios';
+import { getAllGenres, getNowPlayingMovies, getUpComingMovies } from '../services/RequetesAxios';
 
-const Genres = ["All", "Action", "Comedy", "Romance", "Horror", "Sci-Fi"];
+
 
 const HomeScreen = () => {
   const [activeGenre, setActiveGenre] = useState("all");
-  const [nowPlayingMovies, setNowPlayingMovies] = useState({})
-  const [upComingMovies, setUpComingMovies] = useState({})
+  const [nowPlayingMovies, setNowPlayingMovies] = useState({});
+  const [upComingMovies, setUpComingMovies] = useState({});
+  const [genres, setGenres] = useState([{id: 10110, name: "All"}]);
 
   useEffect(() => {
     getNowPlayingMovies()
     .then(movieResponse => setNowPlayingMovies(movieResponse.data))
-  }, [])
+  }, []);
 
   useEffect(()=>{
-    getUpComingMovies().then(movieResponse=> setUpComingMovies(movieResponse.data))
-  })
+    getUpComingMovies()
+    .then(movieResponse=> setUpComingMovies(movieResponse.data))
+  }, []);
+
+  useEffect(()=>{
+    getAllGenres()
+    .then(genreResponse=> setGenres([...genres,...genreResponse.data.genres]))
+  }, []);
 
   return (
     <ScrollView style={styles.container}>
@@ -33,15 +40,15 @@ const HomeScreen = () => {
       </View>
       <View style={styles.genreListContainer}>
       <FlatList 
-      data={Genres}
+      data={genres}
       horizontal
-      keyExtractor={(item)=>item}
+      keyExtractor={(item)=>item.id.toString()}
       showsHorizontalScrollIndicator={false}
       ItemSeparatorComponent={()=> <ItemSeparator width={10}/>}
       renderItem={({item})=>(
       <GenreCard 
-      genreName={item} 
-      active={item === activeGenre ? true : false}
+      genreName={item.name} 
+      active={item.name === activeGenre ? true : false}
       onPress={setActiveGenre}
       />
       )}
