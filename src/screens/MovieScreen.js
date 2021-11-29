@@ -1,16 +1,17 @@
 /* eslint-disable prettier/prettier */
 import React, {useState, useEffect} from 'react';
-import {Text, View, StyleSheet, ScrollView, Dimensions, Image} from 'react-native';
-import ItemSeparator from '../components/ItemSeparator';
-import {LinearGradient} from 'react-native-linear-gradient'
+import {Text, View, StyleSheet, ScrollView, Dimensions, Image, TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 //Components
 import Colors from '../constant/Colors';
 import { getMovieById, getPoster } from '../services/RequetesAxios';
+import ItemSeparator from '../components/ItemSeparator';
 
 const {height, width} = Dimensions.get('screen');
 const setHeight = (h)=> (height/100) * h;
 const setWidth = (w)=> (width/100) * w;
+//const chevron = 
 
 const MovieScreen = ({route,navigation}) => {
   const { movieId } = route.params;
@@ -23,14 +24,17 @@ const MovieScreen = ({route,navigation}) => {
 
   return (
     <ScrollView >
-      <LinearGradient 
-      color={}
-      />
-    <View style={styles.moviePosterImageContainer}>     
+    <View style={styles.moviePosterImageContainer}>    
       <Image style={styles.moviePosterImage} 
       resizeMode="cover"
       source={{uri: getPoster(movie.backdrop_path)}}
-      />
+      />    
+    </View>
+    <View style={styles.hearderContainer}>
+      <TouchableOpacity>
+        < Icon name="chevron-left" size={30} color={Colors.WHITE} />
+      </TouchableOpacity>
+      <Text style={styles.headerText}>Share</Text>
     </View>
     <ItemSeparator height={setHeight(37)} />
     <Text> {movie.title} </Text>
@@ -58,6 +62,21 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 300,
     height: setHeight(35),
     width: setWidth(145),
+  },
+  hearderContainer:{
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    position: "absolute",
+    right: 0,
+    left: 0,
+    top: 50,
+    elevation: 20,
+  },
+  headerText:{
+    color: Colors.WHITE,
+    fontFamily: "NunitoSans-Bold"
   }
 })
 

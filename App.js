@@ -2,6 +2,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 //components
 import HomeScreen from './src/screens/HomeScreen';
 import MovieScreen from './src/screens/MovieScreen';
@@ -13,7 +14,7 @@ const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-    
+      
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen 
@@ -28,8 +29,7 @@ const App = () => {
         />
       </Stack.Navigator>
     </NavigationContainer>
-    
-  );
+  )
 };
 
 
