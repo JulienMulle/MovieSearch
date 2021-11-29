@@ -31,7 +31,7 @@ const MovieScreen = ({route,navigation}) => {
       />    
     </View>
     <View style={styles.hearderContainer}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={()=>navigation.goBack("Home")}>
         < Icon name="chevron-left" size={30} color={Colors.WHITE} />
       </TouchableOpacity>
       <TouchableOpacity style={styles.playButton}>
