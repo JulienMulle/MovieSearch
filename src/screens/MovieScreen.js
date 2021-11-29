@@ -1,12 +1,13 @@
 /* eslint-disable prettier/prettier */
 import React, {useState, useEffect} from 'react';
-import {Text, View, StyleSheet, ScrollView, Dimensions, Image, TouchableOpacity} from 'react-native';
+import {Text, View, StyleSheet, ScrollView, Dimensions, Image, TouchableOpacity, Linking} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 //Components
 import Colors from '../constant/Colors';
-import { getMovieById, getPoster } from '../services/RequetesAxios';
+import { getMovieById, getPoster, getVideo } from '../services/RequetesAxios';
 import ItemSeparator from '../components/ItemSeparator';
+import { APPEND_TO_RESPONSE as AR} from '../constant/Urls';
 
 const {height, width} = Dimensions.get('screen');
 const setHeight = (h)=> (height/100) * h;
@@ -18,7 +19,7 @@ const MovieScreen = ({route,navigation}) => {
   const [movie, setMovie] = useState({});
 
   useEffect(() => {
-    getMovieById(movieId).then((response) => setMovie(response.data));
+    getMovieById(movieId, `${AR.VIDEOS}`).then((response) => setMovie(response.data));
     
   }, []); 
 
@@ -34,7 +35,7 @@ const MovieScreen = ({route,navigation}) => {
       <TouchableOpacity onPress={()=>navigation.goBack()}>
         < Icon name="chevron-left" size={30} color={Colors.WHITE} />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.playButton}>
+      <TouchableOpacity style={styles.playButton} onPress={()=> Linking.openURL(getVideo(movie.videos.results[0].key))}>
       < Icon name="play" size={35} color={Colors.WHITE} />
       </TouchableOpacity>
       <Text style={styles.headerText}>Share</Text>

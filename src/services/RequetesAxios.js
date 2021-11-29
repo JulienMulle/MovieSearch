@@ -6,6 +6,7 @@ import {
     TMDB_API_KEY,
     TMDB_IMAGE_BASE_URL,
     ENDPOINTS,
+    YOUTUBE_BASE_URL,
 } from '../constant/Urls';
 
 const TMDB_HTTP_REQUEST = axios.create({
@@ -24,10 +25,12 @@ TMDB_HTTP_REQUEST.get(ENDPOINTS.UPCOMING_MOVIES);
 const getAllGenres = () =>
 TMDB_HTTP_REQUEST.get(ENDPOINTS.GENRES);
 
-const getMovieById = (movieId) => TMDB_HTTP_REQUEST.get(`${ENDPOINTS.MOVIE}/${movieId}`);
+const getVideo =(key) => `${YOUTUBE_BASE_URL}?v=${key}`;
+
+const getMovieById = (movieId, append_to_response="") => TMDB_HTTP_REQUEST.get(`${ENDPOINTS.MOVIE}/${movieId}`, append_to_response ? {params: {append_to_response}} : null);
 
 const getPoster = (path) => `${TMDB_IMAGE_BASE_URL}/original${path}`;
 
 const getLanguage =(language_iso) => Language.find((language)=> language.iso_639_1 === language_iso)
 
-export {getNowPlayingMovies,getPoster, getLanguage, getUpComingMovies, getAllGenres, getMovieById}
+export {getNowPlayingMovies,getPoster, getLanguage, getUpComingMovies, getAllGenres, getMovieById, getVideo}
