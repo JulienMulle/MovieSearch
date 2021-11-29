@@ -90,7 +90,7 @@ const HomeScreen = () => {
         voteAverage={item.vote_average}
         voteCount={item.vote_count}
         poster={item.poster_path}
-        size={0.4}
+        size={0.5}
         />)}
         />
       </View>

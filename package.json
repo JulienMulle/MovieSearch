@@ -2,6 +2,10 @@
   "name": "moviesearch",
   "version": "0.0.1",
   "private": true,
+  "projectconfig": {
+    "apiKey": "ae463d03ef522ccc9fdc327f68dcc090"
+  },
+
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -35,3 +39,4 @@
     "preset": "react-native"
   }
 }
+
