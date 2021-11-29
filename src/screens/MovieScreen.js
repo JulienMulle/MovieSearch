@@ -34,6 +34,9 @@ const MovieScreen = ({route,navigation}) => {
       <TouchableOpacity>
         < Icon name="chevron-left" size={30} color={Colors.WHITE} />
       </TouchableOpacity>
+      <TouchableOpacity style={styles.playButton}>
+      < Icon name="play" size={35} color={Colors.WHITE} />
+      </TouchableOpacity>
       <Text style={styles.headerText}>Share</Text>
     </View>
     <ItemSeparator height={setHeight(37)} />
@@ -77,6 +80,12 @@ const styles = StyleSheet.create({
   headerText:{
     color: Colors.WHITE,
     fontFamily: "NunitoSans-Bold"
+  },
+  playButton:{
+    position:"absolute",
+    top: 110,
+    left: setWidth(50) - 30/2,
+    elevation: 10,
   }
 })
 
