@@ -11,7 +11,7 @@ import { getAllGenres, getNowPlayingMovies, getUpComingMovies } from '../service
 
 
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const [activeGenre, setActiveGenre] = useState("all");
   const [nowPlayingMovies, setNowPlayingMovies] = useState({});
   const [upComingMovies, setUpComingMovies] = useState({});
@@ -69,6 +69,7 @@ const HomeScreen = () => {
         voteCount={item.vote_count}
         poster={item.poster_path}
         heartLess={false}
+        onPress={()=>navigation.navigate("Movie", {movieId: item.id})}
         />)}
         />
       </View>
@@ -91,6 +92,7 @@ const HomeScreen = () => {
         voteCount={item.vote_count}
         poster={item.poster_path}
         size={0.5}
+        onPress={()=>navigation.navigate("Movie", {movieId: item.id})}
         />)}
         />
       </View>

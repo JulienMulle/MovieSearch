@@ -8,7 +8,16 @@ import { getLanguage, getPoster } from '../services/RequetesAxios';
 
 
 
-const MovieCard = ({title, poster, language, voteAverage, voteCount, size, heartLess}) => {
+const MovieCard = ({
+    title, 
+    poster, 
+    language, 
+    voteAverage, 
+    voteCount, 
+    size, 
+    heartLess,
+    onPress
+    }) => {
     
     const [liked, setLiked] = useState(false);
     const [voteCountValue, setVoteCountValue] = useState(voteCount);
@@ -17,7 +26,7 @@ const MovieCard = ({title, poster, language, voteAverage, voteCount, size, heart
     const HeartClickable = <Icon name= {liked ? "heart" : "heart-o"} size={25 * size} color={ liked ? Colors.HEART : Colors.WHITE} style={{position: "absolute", bottom:10, left:10}}/>;
 
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onPress}>
             <ImageBackground 
             style={{...styles.container, width:230 * size, height:340 * size}} 
             imageStyle={{borderRadius: 12}} 

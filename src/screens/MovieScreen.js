@@ -1,13 +1,23 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
 
-const MovieScreen = () => {
+const MovieScreen = ({route,navigation}) => {
+  const {movieId} = route.params;
+
   return (
-    <View>
-      <Text>MovieScreen</Text>
+    <View style={styles.container}>
+      <Text>MovieScreen {movieId}</Text>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent:"center",
+    alignItems: "center",
+  }
+})
 
 export default MovieScreen;
