@@ -24,7 +24,7 @@ TMDB_HTTP_REQUEST.get(ENDPOINTS.UPCOMING_MOVIES);
 const getAllGenres = () =>
 TMDB_HTTP_REQUEST.get(ENDPOINTS.GENRES);
 
-const getMovieById = () => TMDB_HTTP_REQUEST.get(`${ENDPOINTS.MOVIE}/${movieId}`);
+const getMovieById = (movieId) => TMDB_HTTP_REQUEST.get(`${ENDPOINTS.MOVIE}/${movieId}`);
 
 const getPoster = (path) => `${TMDB_IMAGE_BASE_URL}/original${path}`;
 

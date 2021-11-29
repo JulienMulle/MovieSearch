@@ -5,9 +5,8 @@
   "projectconfig": {
     "apiKey": "ae463d03ef522ccc9fdc327f68dcc090"
   },
-
   "scripts": {
-    "android": "react-native run-android",
+    "android": "npx react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
@@ -21,6 +20,7 @@
     "react": "17.0.2",
     "react-dom": "^17.0.2",
     "react-native": "0.66.3",
+    "react-native-linear-gradient": "^2.5.6",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.9.0",
     "react-native-vector-icons": "^9.0.0"
@@ -39,4 +39,3 @@
     "preset": "react-native"
   }
 }
-
