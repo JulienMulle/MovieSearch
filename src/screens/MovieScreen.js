@@ -12,6 +12,7 @@ import { APPEND_TO_RESPONSE as AR} from '../constant/Urls';
 const {height, width} = Dimensions.get('screen');
 const setHeight = (h)=> (height/100) * h;
 const setWidth = (w)=> (width/100) * w;
+
 //const chevron = 
 
 const MovieScreen = ({route,navigation}) => {
@@ -41,7 +42,13 @@ const MovieScreen = ({route,navigation}) => {
       <Text style={styles.headerText}>Share</Text>
     </View>
     <ItemSeparator height={setHeight(37)} />
-    <Text> {movie.title} </Text>
+    <View style={styles.movieTitleContainer}>
+      <Text style={styles.movieTitle} numberOfLines={2}> {movie.title} </Text>
+      <View style={styles.row}>
+        <Icon name="heart" size={22} color={Colors.HEART} />
+        <Text style={styles.ratingText}>{movie.vote_average}</Text>
+      </View>
+    </View>
     </ScrollView>
   );
 };
@@ -87,7 +94,31 @@ const styles = StyleSheet.create({
     top: 110,
     left: setWidth(50) - 30/2,
     elevation: 10,
-  }
+  },
+  movieTitleContainer:{
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 10,
+  },
+  movieTitle:{
+    color: Colors.BLACK,
+    fontFamily: "NunitoSans-ExtraBold",
+    fontSize: 18,
+    width: setWidth(60),
+  },
+  ratingText:{
+    marginLeft: 5,
+    color: Colors.BLACK,
+    fontFamily: "NunitoSans-ExtraBold",
+    fontSize: 15
+  },
+  row:{
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+
 })
 
 export default MovieScreen;
