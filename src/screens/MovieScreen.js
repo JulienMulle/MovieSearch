@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 //Components
 import Colors from '../constant/Colors';
-import { getMovieById, getPoster, getVideo } from '../services/RequetesAxios';
+import { getLanguage, getMovieById, getPoster, getVideo } from '../services/RequetesAxios';
 import ItemSeparator from '../components/ItemSeparator';
 import { APPEND_TO_RESPONSE as AR} from '../constant/Urls';
 
@@ -49,6 +49,13 @@ const MovieScreen = ({route,navigation}) => {
         <Text style={styles.ratingText}>{movie.vote_average}</Text>
       </View>
     </View>
+    <Text style={styles.genreText}>
+    {movie?.genres?.map((genre) => genre?.name)?.join(", ")} |{" "} 
+    {movie?.runtime}min
+    </Text>
+    <Text style={styles.genreText}>
+      {getLanguage(movie?.original_language)?.english_name}
+    </Text>
     </ScrollView>
   );
 };
@@ -102,6 +109,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   movieTitle:{
+    paddingTop: 5,
     color: Colors.BLACK,
     fontFamily: "NunitoSans-ExtraBold",
     fontSize: 18,
@@ -117,7 +125,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-
+  genreText:{
+    color: Colors.LIGHT_GRAY,
+    paddingHorizontal: 10,
+    paddingTop: 5,
+    fontFamily: "NunitoSans-Bold",
+    fontSize: 13,
+  }
 
 })
 
