@@ -29,33 +29,38 @@ const MovieScreen = ({route,navigation}) => {
     <View style={styles.moviePosterImageContainer}>    
       <Image style={styles.moviePosterImage} 
       resizeMode="cover"
-      source={{uri: getPoster(movie.backdrop_path)}}
+      source={{uri: getPoster(movie?.backdrop_path)}}
       />    
     </View>
     <View style={styles.hearderContainer}>
       <TouchableOpacity onPress={()=>navigation.goBack()}>
         < Icon name="chevron-left" size={30} color={Colors.WHITE} />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.playButton} onPress={()=> Linking.openURL(getVideo(movie.videos.results[0].key))}>
+      <TouchableOpacity style={styles.playButton} onPress={()=> Linking.openURL(getVideo(movie?.videos?.results[0].key))}>
       < Icon name="play" size={35} color={Colors.WHITE} />
       </TouchableOpacity>
       <Text style={styles.headerText}>Share</Text>
     </View>
     <ItemSeparator height={setHeight(37)} />
     <View style={styles.movieTitleContainer}>
-      <Text style={styles.movieTitle} numberOfLines={2}> {movie.title} </Text>
+      <Text style={styles.movieTitle} numberOfLines={2}> {movie?.title} </Text>
       <View style={styles.row}>
         <Icon name="heart" size={22} color={Colors.HEART} />
-        <Text style={styles.ratingText}>{movie.vote_average}</Text>
+        <Text style={styles.ratingText}>{movie?.vote_average}</Text>
       </View>
     </View>
     <Text style={styles.genreText}>
+      {/*sans le ? j'ai des erreurs */}
     {movie?.genres?.map((genre) => genre?.name)?.join(", ")} |{" "} 
     {movie?.runtime}min
     </Text>
     <Text style={styles.genreText}>
       {getLanguage(movie?.original_language)?.english_name}
     </Text>
+    <View style={styles.overviewContainer}>
+      <Text style={styles.overviewTitle}>Overview</Text>
+      <Text style={styles.overvieuwText}>{movie?.overview}</Text>
+    </View>
     </ScrollView>
   );
 };
@@ -131,6 +136,24 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     fontFamily: "NunitoSans-Bold",
     fontSize: 13,
+  },
+  overviewContainer:{
+    backgroundColor: Colors.EXTRA_LIGHT_GRAY,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    marginVertical: 10,
+  },
+  overviewTitle:{
+    color: Colors.BLACK,
+    fontFamily: "NunitoSans-Bold",
+    fontSize: 18,
+  },
+  overvieuwText:{
+    color: Colors.LIGHT_GRAY,
+    paddingVertical: 5,
+    fontFamily: "NunitoSans-Bold",
+    fontSize: 13,
+    textAlign: "justify",
   }
 
 })
