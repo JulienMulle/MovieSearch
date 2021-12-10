@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React, {useState, useEffect} from 'react';
-import {Text, ScrollView, StyleSheet, View, FlatList} from 'react-native';
+import {Text, ScrollView, StyleSheet, View, FlatList, StatusBar} from 'react-native';
+import SafeAreaView from 'react-native-safe-area-view';
 
 //components
 import GenreCard from '../components/GenreCard';
@@ -33,7 +34,9 @@ const HomeScreen = ({navigation}) => {
   }, []);
 
   return (
-    <ScrollView style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="light" />
+    <ScrollView >
       <View style={styles.headerContainer}>
         <Text style={styles.headerTitle}> Now Playing</Text>
         <Text style={styles.headerSubTitle}> View All</Text>
@@ -97,13 +100,14 @@ const HomeScreen = ({navigation}) => {
         />
       </View>
     </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.BASIC_BACKGROUND,
+    
   },
   headerContainer:{
     flexDirection: 'row',

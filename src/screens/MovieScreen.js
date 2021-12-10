@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, {useState, useEffect} from 'react';
-import {Text, View, StyleSheet, ScrollView, Dimensions, Image, TouchableOpacity, Linking} from 'react-native';
+import {Text, View, StyleSheet, ScrollView, Dimensions, Image, TouchableOpacity, Linking, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 //Components
@@ -8,6 +8,7 @@ import Colors from '../constant/Colors';
 import { getLanguage, getMovieById, getPoster, getVideo } from '../services/RequetesAxios';
 import ItemSeparator from '../components/ItemSeparator';
 import { APPEND_TO_RESPONSE as AR} from '../constant/Urls';
+import CastCard from "../components/CastCard";
 
 const {height, width} = Dimensions.get('screen');
 const setHeight = (h)=> (height/100) * h;
@@ -20,7 +21,10 @@ const MovieScreen = ({route,navigation}) => {
   const [movie, setMovie] = useState({});
 
   useEffect(() => {
-    getMovieById(movieId, `${AR.VIDEOS}`).then((response) => setMovie(response.data));
+    getMovieById
+    (movieId,
+       `${AR.VIDEOS},${AR.CREDITS}`
+       ).then((response) => setMovie(response?.data));
     
   }, []); 
 
@@ -60,6 +64,25 @@ const MovieScreen = ({route,navigation}) => {
     <View style={styles.overviewContainer}>
       <Text style={styles.overviewTitle}>Overview</Text>
       <Text style={styles.overvieuwText}>{movie?.overview}</Text>
+    </View>
+    <View>
+      <Text style={styles.castTitle}>Casting</Text>
+
+      <FlatList 
+        style={{ marginVertical: 5 }}
+        data={movie?.credits?.cast}
+        keyExtractor={(item)=> item?.credit_id}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        ListHeaderComponent={() => <ItemSeparator width={20}/>}
+        renderItem={({item})=> (
+          <CastCard 
+            image={item?.profile_path}
+            originalName={item?.name}
+            characterName={item?.character}
+          />
+        )}
+      />
     </View>
     </ScrollView>
   );
@@ -154,6 +177,12 @@ const styles = StyleSheet.create({
     fontFamily: "NunitoSans-Bold",
     fontSize: 13,
     textAlign: "justify",
+  }, 
+  castTitle:{
+    marginLeft: 20, 
+    color: Colors.BLACK,
+    fontFamily: "NunitoSans-Bold",
+    fontSize: 18,
   }
 
 })
