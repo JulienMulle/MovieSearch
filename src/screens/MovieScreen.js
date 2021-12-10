@@ -67,7 +67,12 @@ const MovieScreen = ({route,navigation}) => {
     </View>
     <View>
       <Text style={styles.castTitle}>Casting</Text>
-
+      <TouchableOpacity>
+        <Text style={styles.castSubMenuContainer}>Cast</Text>
+      </TouchableOpacity>
+      <TouchableOpacity>
+      <Text>Crew</Text>
+      </TouchableOpacity>
       <FlatList 
         style={{ marginVertical: 5 }}
         data={movie?.credits?.cast}
@@ -183,8 +188,12 @@ const styles = StyleSheet.create({
     color: Colors.BLACK,
     fontFamily: "NunitoSans-Bold",
     fontSize: 18,
+  },
+  castSubMenuContainer:{
+    marginLeft: 20,
+    flexDirection: "row",
+    marginVertical: 5
   }
-
 })
 
 export default MovieScreen;

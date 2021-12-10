@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, Text } from 'react-native';
 import Colors from '../constant/Colors';
 import { getPoster } from '../services/RequetesAxios';
 import IMAGES from "../constant/Images";
