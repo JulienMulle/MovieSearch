@@ -14,11 +14,13 @@ const {height, width} = Dimensions.get('screen');
 const setHeight = (h)=> (height/100) * h;
 const setWidth = (w)=> (width/100) * w;
 
+
 //const chevron = 
 
 const MovieScreen = ({route,navigation}) => {
   const { movieId } = route.params;
   const [movie, setMovie] = useState({});
+  const [isCastSelected, setIsCastSelected] = useState(true);
 
   useEffect(() => {
     getMovieById
@@ -67,24 +69,33 @@ const MovieScreen = ({route,navigation}) => {
     </View>
     <View>
       <Text style={styles.castTitle}>Casting</Text>
-      <TouchableOpacity>
-        <Text style={styles.castSubMenuContainer}>Cast</Text>
-      </TouchableOpacity>
-      <TouchableOpacity>
-      <Text>Crew</Text>
-      </TouchableOpacity>
+      <View style={styles.castSubMenuContainer}>
+        <TouchableOpacity onPress={() => setIsCastSelected(true)}>
+          <Text style={{...styles.castSubMenuText, 
+          color: isCastSelected ? Colors.BLACK : Colors.LIGHT_GRAY }}>
+              Cast
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => setIsCastSelected(false)}>
+          <Text style={{...styles.castSubMenuText, 
+          color: isCastSelected ? Colors.LIGHT_GRAY : Colors.BLACK }}>
+            Crew
+          </Text>
+        </TouchableOpacity>
+      </View>
       <FlatList 
         style={{ marginVertical: 5 }}
-        data={movie?.credits?.cast}
+        data={ isCastSelected ? movie?.credits?.cast : movie?.credits?.crew}
         keyExtractor={(item)=> item?.credit_id}
         horizontal
         showsHorizontalScrollIndicator={false}
         ListHeaderComponent={() => <ItemSeparator width={20}/>}
+        ItemSeparatorComponent={() => <ItemSeparator width={20} />}
         renderItem={({item})=> (
           <CastCard 
             image={item?.profile_path}
             originalName={item?.name}
-            characterName={item?.character}
+            characterName={isCastSelected ? item?.character : item?.job}
           />
         )}
       />
@@ -193,6 +204,12 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     flexDirection: "row",
     marginVertical: 5
+  },
+  castSubMenuText: {
+    marginRight: 10,
+    color: Colors.BLACK,
+    fontFamily: "NunitoSans-Bold",
+    fontSize: 13,
   }
 })
 
