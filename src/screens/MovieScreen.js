@@ -9,6 +9,8 @@ import { getLanguage, getMovieById, getPoster, getVideo } from '../services/Requ
 import ItemSeparator from '../components/ItemSeparator';
 import { APPEND_TO_RESPONSE as AR} from '../constant/Urls';
 import CastCard from "../components/CastCard";
+import MovieCard from '../components/MovieCard';
+
 
 const {height, width} = Dimensions.get('screen');
 const setHeight = (h)=> (height/100) * h;
@@ -25,9 +27,8 @@ const MovieScreen = ({route,navigation}) => {
   useEffect(() => {
     getMovieById
     (movieId,
-       `${AR.VIDEOS},${AR.CREDITS}`
+      `${AR.VIDEOS},${AR.CREDITS},${AR.RECOMMENDATIONS},${AR.SIMILAR}`
        ).then((response) => setMovie(response?.data));
-    
   }, []); 
 
   return (
@@ -100,6 +101,46 @@ const MovieScreen = ({route,navigation}) => {
         )}
       />
     </View>
+    <Text style={styles.extraListTitle}>Recommanded Movies</Text>
+      <FlatList 
+        data={movie?.recommendations?.results}
+        keyExtractor={(item)=> item?.id?.toString()}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        ListHeaderComponent={() => <ItemSeparator width={20}/>}
+        ItemSeparatorComponent={() => <ItemSeparator width={20} />}
+        renderItem={({item})=> (
+          <MovieCard 
+            title={item.title}
+            language={item.original_language}
+            voteAverage={item.vote_average}
+            voteCount={item.vote_count}
+            poster={item.poster_path}
+            size={0.6}
+            onPress={() => navigation.navigate("movie", { movieId: item.id })}
+          />
+        )}
+      />
+    <Text style={styles.extraListTitle}>Similar Movies</Text>
+      <FlatList 
+        data={movie?.similar?.results}
+        keyExtractor={(item)=> item?.id?.toString()}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        ListHeaderComponent={() => <ItemSeparator width={20}/>}
+        ItemSeparatorComponent={() => <ItemSeparator width={20} />}
+        renderItem={({item})=> (
+          <MovieCard 
+            title={item.title}
+            language={item.original_language}
+            voteAverage={item.vote_average}
+            voteCount={item.vote_count}
+            poster={item.poster_path}
+            size={0.6}
+            onPress={() => navigation.navigate("movie", { movieId: item.id })}
+          />
+        )}
+      />
     </ScrollView>
   );
 };
@@ -210,6 +251,19 @@ const styles = StyleSheet.create({
     color: Colors.BLACK,
     fontFamily: "NunitoSans-Bold",
     fontSize: 13,
+  },
+  extraListTitle:{
+    marginLeft: 20,
+    color: Colors.BLACK,
+    fontFamily: "NunitoSans-Bold",
+    fontSize: 18,
+    marginVertical: 8,
+  },
+  movieListContainer:{
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
   }
 })
 
